@@ -1,0 +1,5 @@
+# Preface {.unnumbered}
+
+There's a lot of documentation out there about both `R` and Google Cloud Platform (GCP), but there's not a ton at the intersection of these things. This book provides an end-to-end example of deploying a shiny app that's connected to a database to GCP.
+
+

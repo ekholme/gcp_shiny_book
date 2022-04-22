@@ -1,0 +1,23 @@
+project:
+  type: book
+
+book:
+  title: "GCP Shiny Booklet"
+  author: "Eric Ekholm"
+  date: "4/22/2022"
+  chapters:
+    - index.qmd
+    - intro.qmd
+    - summary.qmd
+    - references.qmd
+
+bibliography: references.bib
+
+format:
+  html:
+    theme: simplex
+  pdf:
+    documentclass: scrreprt
+
+
+
