@@ -1,0 +1,3 @@
+# Background
+
+This section of the book provides some high-level overview and background on shiny, GCP, Docker, git and other technologies we'll be using. If you're familiar with this stuff already, feel free to skip ahead!

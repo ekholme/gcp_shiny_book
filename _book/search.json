@@ -26,5 +26,33 @@
     "title": "References",
     "section": "",
     "text": "Knuth, Donald E. 1984. “Literate Programming.” Comput.\nJ. 27 (2): 97–111. https://doi.org/10.1093/comjnl/27.2.97."
+  },
+  {
+    "objectID": "intro.html#goals-non-goals",
+    "href": "intro.html#goals-non-goals",
+    "title": "1  Introduction",
+    "section": "1.2 Goals & Non-Goals",
+    "text": "1.2 Goals & Non-Goals"
+  },
+  {
+    "objectID": "intro.html#prerequisites",
+    "href": "intro.html#prerequisites",
+    "title": "1  Introduction",
+    "section": "1.3 Prerequisites",
+    "text": "1.3 Prerequisites"
+  },
+  {
+    "objectID": "background.html",
+    "href": "background.html",
+    "title": "Background",
+    "section": "",
+    "text": "This section of the book provides some high-level overview and background on shiny, GCP, Docker, git and other technologies we’ll be using. If you’re familiar with this stuff already, feel free to skip ahead!"
+  },
+  {
+    "objectID": "hello_world.html",
+    "href": "hello_world.html",
+    "title": "5  Hello, World!",
+    "section": "",
+    "text": "This section of the book contains some basic steps to get you up and running"
   }
 ]

@@ -8,7 +8,12 @@ book:
   chapters:
     - index.qmd
     - intro.qmd
-    - summary.qmd
+    - part: background.qmd
+      chapters:
+        - shiny_background.qmd
+        - gcp_background.qmd
+        - why_gcp.qmd
+    - part: hello_world.qmd
     - references.qmd
 
 bibliography: references.bib
