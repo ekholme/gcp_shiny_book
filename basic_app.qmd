@@ -1,0 +1,3 @@
+# Base App
+
+This chapter describes how to create the base version of the shiny app we'll use in this project. It'll also show how we can deploy it locally.

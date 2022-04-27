@@ -1,0 +1,3 @@
+# Cloud SQL Setup
+
+This chapter describes how to set up Cloud SQL for this project.

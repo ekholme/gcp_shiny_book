@@ -1,0 +1,3 @@
+# Containers
+
+This section presents an overview of containers & how we'll use them in this project. First, we'll discuss Docker at a high level and write out the first iteration of the Dockerfile we'll use in this project. Next, we'll describe Google Cloud Build and Artifact Registry, which we'll use to build and store our container, respectively.

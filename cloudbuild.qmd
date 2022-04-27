@@ -1,0 +1,9 @@
+# Cloud Build & Artifact Registry
+
+This chapter provides an overview of Cloud Build and Artifact Registry, which we'll use to build and store our container.
+
+**Misc**
+
+- mention cloudbuild.yaml setup
+- mention CI/CD
+- sort of misc note that cloud build doesn't cache builds, so each time you build it is "from scratch"

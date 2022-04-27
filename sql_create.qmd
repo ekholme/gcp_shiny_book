@@ -1,0 +1,3 @@
+# Creating Your Table
+
+This section describes how to create tables in Cloud SQL.

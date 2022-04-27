@@ -1,0 +1,3 @@
+# Create Your Project
+
+This chapter describes the initial steps for creating your project, including setting up a git repo.

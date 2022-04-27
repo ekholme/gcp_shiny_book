@@ -1,0 +1,3 @@
+# Shiny
+
+This section describes how to create a basic shiny app that we'll use in this project. It also describes some initial project setup that will be helpful for us later.

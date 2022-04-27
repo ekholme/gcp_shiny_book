@@ -13,7 +13,19 @@ book:
         - shiny_background.qmd
         - gcp_background.qmd
         - why_gcp.qmd
-    - part: hello_world.qmd
+        - hello_world.qmd
+    - part: shiny.qmd
+      chapters:
+        - create_proj.qmd
+        - basic_app.qmd
+    - part: containers.qmd
+      chapters:
+        - docker.qmd
+        - cloudbuild.qmd
+    - part: cloud_sql.qmd
+      chapters:
+        - sql_setup.qmd
+        - sql_create.qmd
     - references.qmd
 
 bibliography: references.bib
