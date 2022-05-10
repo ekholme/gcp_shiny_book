@@ -26,6 +26,7 @@ book:
       chapters:
         - sql_setup.qmd
         - sql_create.qmd
+    - part: cloud_run.qmd
     - references.qmd
 
 bibliography: references.bib

@@ -1,3 +1,7 @@
 # Docker
 
 This section of the book provides a brief overview of Docker, and provides a sample Dockerfile that will create the container we are running in this app.
+
+**Misc**
+
+- mention creating your own image on Dockerhub so that the whole thing doesn't need to build from scratch

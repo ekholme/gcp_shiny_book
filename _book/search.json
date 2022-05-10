@@ -11,7 +11,7 @@
     "href": "intro.html",
     "title": "1  Introduction",
     "section": "",
-    "text": "See Knuth (1984) for additional discussion of literate programming.\n\n\n\n\nKnuth, Donald E. 1984. “Literate Programming.” Comput. J. 27 (2): 97–111. https://doi.org/10.1093/comjnl/27.2.97."
+    "text": "Welcome to Deploying Shiny with Google Cloud! This book – well, booklet, really – is meant to help R users and shiny developers deploy applications using Google Cloud Platform (GCP). Although there are several “hello world” type blog posts out there describing how to deploy an “Old Faithful” shiny app via GCP, there aren’t as many that describe how to deploy apps that align with real-world needs, such as connecting your app to a Cloud SQL database, managing secrets, and securing the application.\nThis booklet is my attempt to fill that gap and provide an end-to-end example that uses several GCP services to run a {shiny} app that more closely aligns with what developers might hope to actually deploy. This isn’t to say we’re building a production-grade app here (we are emphatically not), but rather that this book will highlight features that you will use in production apps that typically aren’t discussed in the “hello world” tutorials.\nFor the most part, I’ll illustrate this process using the GCP console, which is the graphical user interface (GUI) through which users can configure GCP services and whatnot. That said, there will be some cases in which I use the command line and the gcloud SDK or other command line interfaces (CLIs, e.g. psql). When this is the case, I’ll try to describe why I’m opting for the CLI over the console.\nOne caveat of the above is that the Google can change the appearance of the console, so it’s possible that the screenshots in this book aren’t perfectly representative of the current console, but they’re likely close enough.\nPerhaps obviously, this book includes R code. Additionally, it also includes a smattering of supplemental code that is necessary to get your app up and running, such as configurations within Dockerfiles or YAML files. My assumption is that people reading this book are mostly familiar with R, and have some familiarity with YAML in the context of Rmarkdown documents, so I’ll be more explicit in describing the content of non-R code and what it’s doing."
   },
   {
     "objectID": "summary.html",
@@ -32,14 +32,14 @@
     "href": "intro.html#goals-non-goals",
     "title": "1  Introduction",
     "section": "1.2 Goals & Non-Goals",
-    "text": "1.2 Goals & Non-Goals"
+    "text": "1.2 Goals & Non-Goals\nBy the end of this book, you will be able to:\n\nUnderstand what shiny is, what GCP is, and how they can fit together;\nWrite a basic shiny app and run it locally;\nUnderstand the basics of Docker, containers, and how to build & store a container on GCP;\nCreate a Postgres database on Google Cloud SQL and load sample data into it;\nConnect your shiny app deployed on Google Cloud Run to your Cloud SQL database (and do so without exposing secrets);\nConfigure Cloud Run settings so they’re appropriate for your shiny app;\nPassword protect your application\n\nI think it’s also important to highlight the non-goals of the book. These are things that are useful to know but are beyond the scope of this book. Here are some things this book won’t cover:\n\nImproving your shiny app development skills. If you want to learn more about shiny, your best bet is Mastering Shiny by Hadley Wickham. If you’re into videos, you might also check out the Shiny Developer Series videos by Eric Nantz.\nWriting production-grade shiny apps. There’s a better book out there by Colin Fay\nDatabase administration. We’ll spin up a small sample database that we’ll connect our app to for illustration purposes, but in the real world, you’ll likely need to manage your database. Although many of Google’s database products are managed in the sense that they handle maintaining, provisioning, etc. for you, you do still need to pay attention to them. I’m not a database admnistrator, so this is outside of my expertise. If you’re building a production app for your organization, you’ll want to bring in someone that knows about databases.\nAdvanced Docker. Docker is super cool and powerful. It can do a lot. We’re using it to containerize an app, and we’re leveraging images provided by the Rocker Project to do so. We’re going to leave most of the functionality of Docker untouched."
   },
   {
     "objectID": "intro.html#prerequisites",
     "href": "intro.html#prerequisites",
     "title": "1  Introduction",
     "section": "1.3 Prerequisites",
-    "text": "1.3 Prerequisites"
+    "text": "1.3 Prerequisites\nThis booklet is probably most useful for intermediate R users interested in deploying applications to GCP. To get the most out of this book, you probably want to come in with:\n\nThe ability to conduct “basic” data analysis using R and {tidyverse} packages.\nSome familiarity making simple shiny apps.\nExperience using git/Github.\nSome experience working with databases.\nDocker installed. We’ll walk through the basics of how to use it in the context of this project, but we won’t install it together."
   },
   {
     "objectID": "background.html",
@@ -54,5 +54,82 @@
     "title": "5  Hello, World!",
     "section": "",
     "text": "This section of the book contains some basic steps to get you up and running"
+  },
+  {
+    "objectID": "intro.html#purpose",
+    "href": "intro.html#purpose",
+    "title": "1  Introduction",
+    "section": "1.1 Purpose",
+    "text": "1.1 Purpose\nAgain, the purpose of the book is to help people who want to deploy shiny apps to GCP, and to create a one-stop-shop (sort of) that can walk through a slightly-more-than-minimal example of doing this."
+  },
+  {
+    "objectID": "shiny.html",
+    "href": "shiny.html",
+    "title": "Shiny",
+    "section": "",
+    "text": "This section describes how to create a basic shiny app that we’ll use in this project. It also describes some initial project setup that will be helpful for us later."
+  },
+  {
+    "objectID": "create_proj.html",
+    "href": "create_proj.html",
+    "title": "6  Create Your Project",
+    "section": "",
+    "text": "This chapter describes the initial steps for creating your project, including setting up a git repo."
+  },
+  {
+    "objectID": "basic_app.html",
+    "href": "basic_app.html",
+    "title": "7  Base App",
+    "section": "",
+    "text": "This chapter describes how to create the base version of the shiny app we’ll use in this project. It’ll also show how we can deploy it locally."
+  },
+  {
+    "objectID": "containers.html",
+    "href": "containers.html",
+    "title": "Containers",
+    "section": "",
+    "text": "This section presents an overview of containers & how we’ll use them in this project. First, we’ll discuss Docker at a high level and write out the first iteration of the Dockerfile we’ll use in this project. Next, we’ll describe Google Cloud Build and Artifact Registry, which we’ll use to build and store our container, respectively."
+  },
+  {
+    "objectID": "docker.html",
+    "href": "docker.html",
+    "title": "8  Docker",
+    "section": "",
+    "text": "Misc\n\nmention creating your own image on Dockerhub so that the whole thing doesn’t need to build from scratch"
+  },
+  {
+    "objectID": "cloudbuild.html",
+    "href": "cloudbuild.html",
+    "title": "9  Cloud Build & Artifact Registry",
+    "section": "",
+    "text": "Misc\n\nmention cloudbuild.yaml setup\nmention CI/CD\nsort of misc note that cloud build doesn’t cache builds, so each time you build it is “from scratch”"
+  },
+  {
+    "objectID": "cloud_sql.html",
+    "href": "cloud_sql.html",
+    "title": "Cloud SQL",
+    "section": "",
+    "text": "This section describes setting up a Postgres SQL database in Cloud SQL, including initially configuring the database, connecting to the database via a CLI (if you want to do this), loading data into the database,"
+  },
+  {
+    "objectID": "sql_setup.html",
+    "href": "sql_setup.html",
+    "title": "10  Cloud SQL Setup",
+    "section": "",
+    "text": "This chapter describes how to set up Cloud SQL for this project."
+  },
+  {
+    "objectID": "sql_create.html",
+    "href": "sql_create.html",
+    "title": "11  Creating Your Table",
+    "section": "",
+    "text": "This section describes how to create tables in Cloud SQL."
+  },
+  {
+    "objectID": "cloud_run.html",
+    "href": "cloud_run.html",
+    "title": "12  Cloud Run",
+    "section": "",
+    "text": "This section describes how to deploy your app on Cloud Run, focusing on the configurations specific to shiny and Cloud Run."
   }
 ]

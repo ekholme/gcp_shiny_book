@@ -1,7 +1,44 @@
 # Introduction
 
+Welcome to *Deploying Shiny with Google Cloud*! This book -- well, booklet, really -- is meant to help `R` users and `shiny` developers deploy applications using [Google Cloud Platform](https://cloud.google.com/) (GCP). Although there are several "hello world" type blog posts out there describing how to deploy an ["Old Faithful"](https://shiny.rstudio.com/gallery/faithful.html) shiny app via GCP, there aren't as many that describe how to deploy apps that align with real-world needs, such as connecting your app to a [Cloud SQL database](https://cloud.google.com/sql/), managing secrets, and securing the application. 
+
+This booklet is my attempt to fill that gap and provide an end-to-end example that uses several GCP services to run a `{shiny}` app that more closely aligns with what developers might hope to actually deploy. This isn't to say we're building a production-grade app here (we are emphatically not), but rather that this book will highlight features that you will use in production apps that typically aren't discussed in the "hello world" tutorials.
+
+For the most part, I'll illustrate this process using the GCP console, which is the graphical user interface (GUI) through which users can configure GCP services and whatnot. That said, there will be some cases in which I use the command line and the [`gcloud` SDK](https://cloud.google.com/sdk) or other command line interfaces (CLIs, e.g. `psql`). When this is the case, I'll try to describe why I'm opting for the CLI over the console.
+
+One caveat of the above is that the Google can change the appearance of the console, so it's possible that the screenshots in this book aren't perfectly representative of the current console, but they're likely close enough.
+
+Perhaps obviously, this book includes `R` code. Additionally, it also includes a smattering of supplemental code that is necessary to get your app up and running, such as configurations within Dockerfiles or YAML files. My assumption is that people reading this book are mostly familiar with R, and have some familiarity with YAML in the context of Rmarkdown documents, so I'll be more explicit in describing the content of non-R code and what it's doing.
+
 ## Purpose
+
+Again, the purpose of the book is to help people who want to deploy shiny apps to GCP, and to create a one-stop-shop (sort of) that can walk through a slightly-more-than-minimal example of doing this.
 
 ## Goals & Non-Goals
 
+By the end of this book, you will be able to:
+
+- Understand what shiny is, what GCP is, and how they can fit together;
+- Write a basic shiny app and run it locally;
+- Understand the basics of Docker, containers, and how to build & store a container on GCP;
+- Create a Postgres database on Google Cloud SQL and load sample data into it;
+- Connect your shiny app deployed on Google Cloud Run to your Cloud SQL database (and do so without exposing secrets);
+- Configure Cloud Run settings so they're appropriate for your shiny app;
+- Password protect your application
+
+I think it's also important to highlight the non-goals of the book. These are things that are useful to know but are beyond the scope of this book. Here are some things this book **won't cover:**
+
+- Improving your `shiny` app development skills. If you want to learn more about `shiny`, your best bet is [Mastering Shiny by Hadley Wickham](https://mastering-shiny.org/). If you're into videos, you might also check out the [Shiny Developer Series videos by Eric Nantz](https://shinydevseries.com/).
+- Writing production-grade `shiny` apps. [There's a better book out there by Colin Fay](https://engineering-shiny.org/)
+- Database administration. We'll spin up a small sample database that we'll connect our app to for illustration purposes, but in the real world, you'll likely need to manage your database. Although many of Google's database products are managed in the sense that they handle maintaining, provisioning, etc. for you, you do still need to pay attention to them. I'm not a database admnistrator, so this is outside of my expertise. If you're building a production app for your organization, you'll want to bring in someone that knows about databases.
+- Advanced Docker. Docker is super cool and powerful. It can do a lot. We're using it to containerize an app, and we're leveraging images provided by [the Rocker Project](https://www.rocker-project.org/) to do so. We're going to leave most of the functionality of Docker untouched.
+
 ## Prerequisites
+
+This booklet is probably most useful for intermediate R users interested in deploying applications to GCP. To get the most out of this book, you probably want to come in with:
+
+- The ability to conduct "basic" data analysis using R and `{tidyverse}` packages.
+- Some familiarity making simple `shiny` apps.
+- Experience using git/Github.
+- Some experience working with databases.
+- Docker installed. We'll walk through the basics of how to use it in the context of this project, but we won't install it together.

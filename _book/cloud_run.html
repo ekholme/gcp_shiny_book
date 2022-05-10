@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>GCP Shiny Booklet - 1&nbsp; Introduction</title>
+<title>GCP Shiny Booklet - 12&nbsp; Cloud Run</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -24,8 +24,8 @@ ul.task-list{list-style: none;}
 <script src="site_libs/quarto-search/autocomplete.umd.js"></script>
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
-<link href="./background.html" rel="next">
-<link href="./index.html" rel="prev">
+<link href="./references.html" rel="next">
+<link href="./sql_create.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -64,7 +64,7 @@ ul.task-list{list-style: none;}
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></h1>
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Cloud Run</span></h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -94,7 +94,7 @@ ul.task-list{list-style: none;}
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./intro.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></a>
+  <a href="./intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -189,7 +189,7 @@ ul.task-list{list-style: none;}
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./cloud_run.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Cloud Run</span></a>
+  <a href="./cloud_run.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Cloud Run</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -202,22 +202,14 @@ ul.task-list{list-style: none;}
 </nav>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc">
-    <h2 id="toc-title">Table of contents</h2>
-   
-  <ul>
-  <li><a href="#purpose" id="toc-purpose" class="nav-link active" data-scroll-target="#purpose"> <span class="header-section-number">1.1</span> Purpose</a></li>
-  <li><a href="#goals-non-goals" id="toc-goals-non-goals" class="nav-link" data-scroll-target="#goals-non-goals"> <span class="header-section-number">1.2</span> Goals &amp; Non-Goals</a></li>
-  <li><a href="#prerequisites" id="toc-prerequisites" class="nav-link" data-scroll-target="#prerequisites"> <span class="header-section-number">1.3</span> Prerequisites</a></li>
-  </ul>
-</nav>
+        
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></h1>
+<h1 class="title d-none d-lg-block"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Cloud Run</span></h1>
 </div>
 
 
@@ -233,48 +225,9 @@ ul.task-list{list-style: none;}
 
 </header>
 
-<p>Welcome to <em>Deploying Shiny with Google Cloud</em>! This book – well, booklet, really – is meant to help <code>R</code> users and <code>shiny</code> developers deploy applications using <a href="https://cloud.google.com/">Google Cloud Platform</a> (GCP). Although there are several “hello world” type blog posts out there describing how to deploy an <a href="https://shiny.rstudio.com/gallery/faithful.html">“Old Faithful”</a> shiny app via GCP, there aren’t as many that describe how to deploy apps that align with real-world needs, such as connecting your app to a <a href="https://cloud.google.com/sql/">Cloud SQL database</a>, managing secrets, and securing the application.</p>
-<p>This booklet is my attempt to fill that gap and provide an end-to-end example that uses several GCP services to run a <code>{shiny}</code> app that more closely aligns with what developers might hope to actually deploy. This isn’t to say we’re building a production-grade app here (we are emphatically not), but rather that this book will highlight features that you will use in production apps that typically aren’t discussed in the “hello world” tutorials.</p>
-<p>For the most part, I’ll illustrate this process using the GCP console, which is the graphical user interface (GUI) through which users can configure GCP services and whatnot. That said, there will be some cases in which I use the command line and the <a href="https://cloud.google.com/sdk"><code>gcloud</code> SDK</a> or other command line interfaces (CLIs, e.g.&nbsp;<code>psql</code>). When this is the case, I’ll try to describe why I’m opting for the CLI over the console.</p>
-<p>One caveat of the above is that the Google can change the appearance of the console, so it’s possible that the screenshots in this book aren’t perfectly representative of the current console, but they’re likely close enough.</p>
-<p>Perhaps obviously, this book includes <code>R</code> code. Additionally, it also includes a smattering of supplemental code that is necessary to get your app up and running, such as configurations within Dockerfiles or YAML files. My assumption is that people reading this book are mostly familiar with R, and have some familiarity with YAML in the context of Rmarkdown documents, so I’ll be more explicit in describing the content of non-R code and what it’s doing.</p>
-<section id="purpose" class="level2" data-number="1.1">
-<h2 data-number="1.1" class="anchored" data-anchor-id="purpose"><span class="header-section-number">1.1</span> Purpose</h2>
-<p>Again, the purpose of the book is to help people who want to deploy shiny apps to GCP, and to create a one-stop-shop (sort of) that can walk through a slightly-more-than-minimal example of doing this.</p>
-</section>
-<section id="goals-non-goals" class="level2" data-number="1.2">
-<h2 data-number="1.2" class="anchored" data-anchor-id="goals-non-goals"><span class="header-section-number">1.2</span> Goals &amp; Non-Goals</h2>
-<p>By the end of this book, you will be able to:</p>
-<ul>
-<li>Understand what shiny is, what GCP is, and how they can fit together;</li>
-<li>Write a basic shiny app and run it locally;</li>
-<li>Understand the basics of Docker, containers, and how to build &amp; store a container on GCP;</li>
-<li>Create a Postgres database on Google Cloud SQL and load sample data into it;</li>
-<li>Connect your shiny app deployed on Google Cloud Run to your Cloud SQL database (and do so without exposing secrets);</li>
-<li>Configure Cloud Run settings so they’re appropriate for your shiny app;</li>
-<li>Password protect your application</li>
-</ul>
-<p>I think it’s also important to highlight the non-goals of the book. These are things that are useful to know but are beyond the scope of this book. Here are some things this book <strong>won’t cover:</strong></p>
-<ul>
-<li>Improving your <code>shiny</code> app development skills. If you want to learn more about <code>shiny</code>, your best bet is <a href="https://mastering-shiny.org/">Mastering Shiny by Hadley Wickham</a>. If you’re into videos, you might also check out the <a href="https://shinydevseries.com/">Shiny Developer Series videos by Eric Nantz</a>.</li>
-<li>Writing production-grade <code>shiny</code> apps. <a href="https://engineering-shiny.org/">There’s a better book out there by Colin Fay</a></li>
-<li>Database administration. We’ll spin up a small sample database that we’ll connect our app to for illustration purposes, but in the real world, you’ll likely need to manage your database. Although many of Google’s database products are managed in the sense that they handle maintaining, provisioning, etc. for you, you do still need to pay attention to them. I’m not a database admnistrator, so this is outside of my expertise. If you’re building a production app for your organization, you’ll want to bring in someone that knows about databases.</li>
-<li>Advanced Docker. Docker is super cool and powerful. It can do a lot. We’re using it to containerize an app, and we’re leveraging images provided by <a href="https://www.rocker-project.org/">the Rocker Project</a> to do so. We’re going to leave most of the functionality of Docker untouched.</li>
-</ul>
-</section>
-<section id="prerequisites" class="level2" data-number="1.3">
-<h2 data-number="1.3" class="anchored" data-anchor-id="prerequisites"><span class="header-section-number">1.3</span> Prerequisites</h2>
-<p>This booklet is probably most useful for intermediate R users interested in deploying applications to GCP. To get the most out of this book, you probably want to come in with:</p>
-<ul>
-<li>The ability to conduct “basic” data analysis using R and <code>{tidyverse}</code> packages.</li>
-<li>Some familiarity making simple <code>shiny</code> apps.</li>
-<li>Experience using git/Github.</li>
-<li>Some experience working with databases.</li>
-<li>Docker installed. We’ll walk through the basics of how to use it in the context of this project, but we won’t install it together.</li>
-</ul>
+<p>This section describes how to deploy your app on Cloud Run, focusing on the configurations specific to shiny and Cloud Run.</p>
 
 
-</section>
 
 </main> <!-- /main -->
 <script type="application/javascript">
@@ -358,13 +311,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./index.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Preface</span>
+      <a href="./sql_create.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Creating Your Table</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./background.html" class="pagination-link">
-        <span class="nav-page-text">Background</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./references.html" class="pagination-link">
+        <span class="nav-page-text">References</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

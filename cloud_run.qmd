@@ -1,0 +1,3 @@
+# Cloud Run
+
+This section describes how to deploy your app on Cloud Run, focusing on the configurations specific to shiny and Cloud Run.
