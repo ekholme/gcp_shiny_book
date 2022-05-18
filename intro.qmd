@@ -37,7 +37,7 @@ I think it's also important to highlight the non-goals of the book. These are th
 
 This booklet is probably most useful for intermediate R users interested in deploying applications to GCP. To get the most out of this book, you probably want to come in with:
 
-- The ability to conduct "basic" data analysis using R and `{tidyverse}` packages.
+- The ability to conduct "basic" data analysis using R and `{tidyverse}` packages. If you're looking to learn more about data science with R, Hadley Wickham's [R for Data Science](https://r4ds.had.co.nz/) is a great resource.
 - Some familiarity making simple `shiny` apps.
 - Experience using git/Github.
 - Some experience working with databases.

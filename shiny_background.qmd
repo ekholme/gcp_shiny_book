@@ -1,1 +1,25 @@
 # Shiny Background
+
+If you're reading this, chances are that you already know what `shiny` is. You've probably built a few shiny apps locally, maybe you've deployed some to [shinyapps.io](https://www.shinyapps.io/) or other platforms, and now you're curious about how to deploy your app to GCP.
+
+But, just so we're all on the same page, this chapter is going to give a criminally brief and terribly incomplete overview of what `shiny` is. If you're looking to learn more about developing `shiny` apps, there are lots of great resources out there, and [RStudio's shiny site](https://shiny.rstudio.com/) is probably the best place to start.
+
+## What Is Shiny?
+
+`Shiny` is a framework through which R users can build interactive web apps. Shiny apps can be many things, but they're often dashboards or some other style of tool for interacting with data and/or statistical models. One of the nice features of `shiny` is that you can build these apps purely with R code -- you don't need to know HTML, CSS, Javascript, or any other backend language like Go or Rust or Python. Knowing some HTML/CSS/Javascript can be helpful if you want to extend your `shiny` app, but they're not necessary.
+
+Another nice feature of `shiny` is that, since it's built using R code, it interacts nicely with other R code. This means we can do things like work with dataframes and model objects easily without having to worry about translating these things into objects that other languages can understand. It also means we can prototype apps fairly quickly.
+
+## Components of a Shiny App
+
+At a very broad level, `shiny` apps consist of two components: a **user interface (UI)** and a **server** (there's no acronym for server, just FYI).
+
+RESUME HERE.
+
+### UI
+
+### Server
+
+## Old Faithful
+
+If you've been around `shiny` for any amount of time, you've probably seen the Old Faithful `shiny` app, which is basically the "hello world" of shiny. Here's the code for it, 
