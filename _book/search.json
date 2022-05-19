@@ -39,7 +39,7 @@
     "href": "intro.html#prerequisites",
     "title": "1  Introduction",
     "section": "1.3 Prerequisites",
-    "text": "1.3 Prerequisites\nThis booklet is probably most useful for intermediate R users interested in deploying applications to GCP. To get the most out of this book, you probably want to come in with:\n\nThe ability to conduct “basic” data analysis using R and {tidyverse} packages.\nSome familiarity making simple shiny apps.\nExperience using git/Github.\nSome experience working with databases.\nDocker installed. We’ll walk through the basics of how to use it in the context of this project, but we won’t install it together."
+    "text": "1.3 Prerequisites\nThis booklet is probably most useful for intermediate R users interested in deploying applications to GCP. To get the most out of this book, you probably want to come in with:\n\nThe ability to conduct “basic” data analysis using R and {tidyverse} packages. If you’re looking to learn more about data science with R, Hadley Wickham’s R for Data Science is a great resource.\nSome familiarity making simple shiny apps.\nExperience using git/Github.\nSome experience working with databases.\nDocker installed. We’ll walk through the basics of how to use it in the context of this project, but we won’t install it together."
   },
   {
     "objectID": "background.html",
@@ -131,5 +131,40 @@
     "title": "12  Cloud Run",
     "section": "",
     "text": "This section describes how to deploy your app on Cloud Run, focusing on the configurations specific to shiny and Cloud Run."
+  },
+  {
+    "objectID": "shiny_background.html",
+    "href": "shiny_background.html",
+    "title": "2  Shiny Background",
+    "section": "",
+    "text": "If you’re reading this, chances are that you already know what shiny is. You’ve probably built a few shiny apps locally, maybe you’ve deployed some to shinyapps.io or other platforms, and now you’re curious about how to deploy your app to GCP.\nBut, just so we’re all on the same page, this chapter is going to give a criminally brief and terribly incomplete overview of what shiny is. If you’re looking to learn more about developing shiny apps, there are lots of great resources out there, and RStudio’s shiny site is probably the best place to start."
+  },
+  {
+    "objectID": "shiny_background.html#what-is-shiny",
+    "href": "shiny_background.html#what-is-shiny",
+    "title": "2  Shiny Background",
+    "section": "2.1 What Is Shiny?",
+    "text": "2.1 What Is Shiny?\nShiny is a framework through which R users can build interactive web apps. Shiny apps can be many things, but they’re often dashboards or some other style of tool for interacting with data and/or statistical models. When describing them, I’m mostly going to assume you’re making a dashboard. One of the nice features of shiny is that you can build these apps purely with R code – you don’t need to know HTML, CSS, Javascript, or any other backend language like Go or Rust or Python. Knowing some HTML/CSS/Javascript can be helpful if you want to extend your shiny app, but they’re not necessary.\nAnother nice feature of shiny is that, since it’s built using R code, it interacts nicely with other R code. This means we can do things like work with dataframes and model objects easily without having to worry about translating these things into objects that other languages can understand. It also means we can prototype apps fairly quickly."
+  },
+  {
+    "objectID": "shiny_background.html#components-of-a-shiny-app",
+    "href": "shiny_background.html#components-of-a-shiny-app",
+    "title": "2  Shiny Background",
+    "section": "2.2 Components of a Shiny App",
+    "text": "2.2 Components of a Shiny App\nAt a very broad level, shiny apps consist of two components: a user interface (UI) and a server (there’s no acronym for server, just FYI).\n\n2.2.1 UI\nLike its name suggests, the UI is how users interact (or interface) with your application. It usually consists of input devices (dropdowns, sliders, open text, etc) and output displays (e.g. tables, graphs, text) arranged in a way that’s hopefully appealing and navigable. The inputs of the UI are (always? almost always?) parameters that get passed to functions in the server, and the outputs in the UI are the results of functions executed by the server.\n\n\n2.2.2 Server\nThe server is where the logic of your code gets executed. Its job is to wrap together several functions that take inputs from the UI (as well as inputs not defined in the UI), pass them into functions, and then pass the results of these functions back to the UI to display as outputs. Moreso than the UI, the server is reminiscent of “typical” R code. The server is where you’ll predict from models, create plots, query databases, etc."
+  },
+  {
+    "objectID": "shiny_background.html#old-faithful",
+    "href": "shiny_background.html#old-faithful",
+    "title": "2  Shiny Background",
+    "section": "2.3 Old Faithful",
+    "text": "2.3 Old Faithful\nIf you’ve been around shiny for any amount of time, you’ve probably seen the Old Faithful shiny app, which is basically the “hello world” of shiny. Here’s the code for it (cribbed from RStudio):\n\nlibrary(shiny)\n\n# Define UI for app that draws a histogram ----\nui <- fluidPage(\n\n  # App title ----\n  titlePanel(\"Hello Shiny!\"),\n\n  # Sidebar layout with input and output definitions ----\n  sidebarLayout(\n\n    # Sidebar panel for inputs ----\n    sidebarPanel(\n\n      # Input: Slider for the number of bins ----\n      sliderInput(inputId = \"bins\",\n                  label = \"Number of bins:\",\n                  min = 1,\n                  max = 50,\n                  value = 30)\n\n    ),\n\n    # Main panel for displaying outputs ----\n    mainPanel(\n\n      # Output: Histogram ----\n      plotOutput(outputId = \"distPlot\")\n\n    )\n  )\n)\n\n# Define server logic required to draw a histogram ----\nserver <- function(input, output, session) {\n\n  # Histogram of the Old Faithful Geyser Data ----\n  # with requested number of bins\n  # This expression that generates a histogram is wrapped in a call\n  # to renderPlot to indicate that:\n  #\n  # 1. It is \"reactive\" and therefore should be automatically\n  #    re-executed when inputs (input$bins) change\n  # 2. Its output type is a plot\n  output$distPlot <- renderPlot({\n\n    x    <- faithful$waiting\n    bins <- seq(min(x), max(x), length.out = input$bins + 1)\n\n    hist(x, breaks = bins, col = \"#75AADB\", border = \"white\",\n         xlab = \"Waiting time to next eruption (in mins)\",\n         main = \"Histogram of waiting times\")\n\n    })\n\n}\n\nshinyApp(ui, server)"
+  },
+  {
+    "objectID": "shiny_background.html#wrapping-up",
+    "href": "shiny_background.html#wrapping-up",
+    "title": "2  Shiny Background",
+    "section": "2.4 Wrapping Up",
+    "text": "2.4 Wrapping Up\nThis brief chapter is meant to give a way-too-short description of shiny. My assumption is that if you’re reading this book, you likely know all of this already. And if this information was new to you, you may want to learn more about shiny before proceeding."
   }
 ]
