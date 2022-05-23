@@ -88,6 +88,10 @@ server <- function(input, output, session) {
 shinyApp(ui, server)
 ```
 
+And here's a screenshot of the app it creates:
+
+![](img/shiny_background/faithful.PNG)
+
 ## Wrapping Up
 
 This brief chapter is meant to give a way-too-short description of `shiny`. My assumption is that if you're reading this book, you likely know all of this already. And if this information was new to you, you may want to learn more about `shiny` before proceeding.

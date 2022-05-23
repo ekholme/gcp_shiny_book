@@ -1,1 +1,11 @@
 # Google Cloud Background
+
+[Google Cloud Platform](https://cloud.google.com/) (I'll use GCP, Google Cloud Platform, and Google Cloud pretty much interchangeably throughout this booklet) is, along with Amazon Web Services (AWS) and Microsoft Azure, one of the three "big" public cloud services. A very simple (but not entirely correct) way to think of GCP is that it's basically a bunch of specialized computers that you can pay to use, and these specialized computers can do different things. GCP offers services including compute (e.g. virtual machines, Kubernetes Engine, Cloud Run), databases (e.g. CloudSQL, Firestore, BigQuery), machine learning (e.g. Vertex AI), CI/CD (e.g. Cloud Build), and more. Given how large and ubiquitous of a company Google is, and given that they're a leader in the tech industry, it's probably not surprising that GCP can do pretty much anything you can think up.
+
+It is well beyond the scope of this little booklet to delve into all of the features of GCP. Actually, it's beyond the scope of this booklet to fully cover even the services we are going to use. So if you're interested in learning more about GCP, there are lots of avenues you might pursue. Of these, I'd recommend:
+
+- [GCP's "Get Started" page](https://cloud.google.com/docs/get-started), which has a great variety of tutorials and overview docs
+- [The Google Cloud Tech YouTube channel](https://www.youtube.com/user/googlecloudplatform), which is the official GCP channel. It has some great videos for each service/product GCP offers.
+- Docs for the service you're interested in. Each service has a variety of documents, which include code snippets and examples for many popular languages. Unfortunately, none of these code snippets are written in R (hence this book), but if you can (sort of) read another language, you can get a sense for various services.
+
+RESUME HERE. GET INTO SPECIFIC GCP SERVICES WE'LL FOCUS ON. THEN WHY GCP.

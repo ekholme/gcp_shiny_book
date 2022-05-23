@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-0.9.298">
+<meta name="generator" content="quarto-0.9.315">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -120,11 +120,76 @@ ul.task-list{list-style: none;}
   <a href="./why_gcp.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Why Google Cloud?</span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./hello_world.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Hello, World!</span></a>
+  </div>
+</li>
+    </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+    <div class="sidebar-item-container"> 
+        <a href="./shiny.html" class="sidebar-item-text sidebar-link">Shiny</a>
+      <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+        <i class="bi bi-chevron-right ms-2"></i>
+      </a>
+    </div>
+    <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./create_proj.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Create Your Project</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./basic_app.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Base App</span></a>
+  </div>
+</li>
+    </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+    <div class="sidebar-item-container"> 
+        <a href="./containers.html" class="sidebar-item-text sidebar-link">Containers</a>
+      <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+        <i class="bi bi-chevron-right ms-2"></i>
+      </a>
+    </div>
+    <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./docker.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Docker</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cloudbuild.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Cloud Build &amp; Artifact Registry</span></a>
+  </div>
+</li>
+    </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+    <div class="sidebar-item-container"> 
+        <a href="./cloud_sql.html" class="sidebar-item-text sidebar-link">Cloud SQL</a>
+      <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+        <i class="bi bi-chevron-right ms-2"></i>
+      </a>
+    </div>
+    <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./sql_setup.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Cloud SQL Setup</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./sql_create.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Creating Your Table</span></a>
+  </div>
+</li>
     </ul>
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./hello_world.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Hello, World!</span></a>
+  <a href="./cloud_run.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Cloud Run</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -160,6 +225,14 @@ ul.task-list{list-style: none;}
 
 </header>
 
+<p><a href="https://cloud.google.com/">Google Cloud Platform</a> (I’ll use GCP, Google Cloud Platform, and Google Cloud pretty much interchangeably throughout this booklet) is, along with Amazon Web Services (AWS) and Microsoft Azure, one of the three “big” public cloud services. A very simple (but not entirely correct) way to think of GCP is that it’s basically a bunch of specialized computers that you can pay to use, and these specialized computers can do different things. GCP offers services including compute (e.g.&nbsp;virtual machines, Kubernetes Engine, Cloud Run), databases (e.g.&nbsp;CloudSQL, Firestore, BigQuery), machine learning (e.g.&nbsp;Vertex AI), CI/CD (e.g.&nbsp;Cloud Build), and more. Given how large and ubiquitous of a company Google is, and given that they’re a leader in the tech industry, it’s probably not surprising that GCP can do pretty much anything you can think up.</p>
+<p>It is well beyond the scope of this little booklet to delve into all of the features of GCP. Actually, it’s beyond the scope of this booklet to fully cover even the services we are going to use. So if you’re interested in learning more about GCP, there are lots of avenues you might pursue. Of these, I’d recommend:</p>
+<ul>
+<li><a href="https://cloud.google.com/docs/get-started">GCP’s “Get Started” page</a>, which has a great variety of tutorials and overview docs</li>
+<li><a href="https://www.youtube.com/user/googlecloudplatform">The Google Cloud Tech YouTube channel</a>, which is the official GCP channel. It has some great videos for each service/product GCP offers.</li>
+<li>Docs for the service you’re interested in. Each service has a variety of documents, which include code snippets and examples for many popular languages. Unfortunately, none of these code snippets are written in R (hence this book), but if you can (sort of) read another language, you can get a sense for various services.</li>
+</ul>
+<p>RESUME HERE. GET INTO SPECIFIC GCP SERVICES WE’LL FOCUS ON. THEN WHY GCP.</p>
 
 
 
