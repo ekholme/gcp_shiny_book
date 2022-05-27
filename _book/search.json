@@ -172,6 +172,48 @@
     "href": "gcp_background.html",
     "title": "3  Google Cloud Background",
     "section": "",
-    "text": "It is well beyond the scope of this little booklet to delve into all of the features of GCP. Actually, it’s beyond the scope of this booklet to fully cover even the services we are going to use. So if you’re interested in learning more about GCP, there are lots of avenues you might pursue. Of these, I’d recommend:\n\nGCP’s “Get Started” page, which has a great variety of tutorials and overview docs\nThe Google Cloud Tech YouTube channel, which is the official GCP channel. It has some great videos for each service/product GCP offers.\nDocs for the service you’re interested in. Each service has a variety of documents, which include code snippets and examples for many popular languages. Unfortunately, none of these code snippets are written in R (hence this book), but if you can (sort of) read another language, you can get a sense for various services.\n\nRESUME HERE. GET INTO SPECIFIC GCP SERVICES WE’LL FOCUS ON. THEN WHY GCP."
+    "text": "Google Cloud Platform (I’ll use GCP, Google Cloud Platform, and Google Cloud pretty much interchangeably throughout this booklet) is, along with Amazon Web Services (AWS) and Microsoft Azure, one of the three “big” public cloud services. A very simple (but not entirely correct) way to think of GCP is that it’s basically a bunch of specialized computers that you can pay to use, and these specialized computers can do different things. GCP offers services including compute (e.g. virtual machines, Kubernetes Engine, Cloud Run), databases (e.g. CloudSQL, Firestore, BigQuery), machine learning (e.g. Vertex AI), CI/CD (e.g. Cloud Build), and more. Given how large and ubiquitous of a company Google is, and given that they’re a leader in the tech industry, it’s probably not surprising that GCP can do pretty much anything you can think up.\nIt is well beyond the scope of this little booklet to delve into all of the features of GCP. Actually, it’s beyond the scope of this booklet to fully cover even the services we are going to use. So if you’re interested in learning more about GCP, there are lots of avenues you might pursue. Of these, I’d recommend:\nThat said, we’ll be using the following GCP services in this project. I’ll provide a very brief overview of them here, and then provide more detail about each one in the appropriate sections later on."
+  },
+  {
+    "objectID": "gcp_background.html#cloud-run",
+    "href": "gcp_background.html#cloud-run",
+    "title": "3  Google Cloud Background",
+    "section": "3.1 Cloud Run",
+    "text": "3.1 Cloud Run\nCloud Run is the main service we’re using to run our shiny application. It’s a “fully managed serverless platform,” which basically means that GCP takes care of a lot of the configuration, provisioning, and management for you – you don’t need to worry about maintaining a server – which is great. Another key feature of Cloud Run is that it runs containerized applications, and as a result can run pretty much anything you want it to, including shiny apps. We’ll get into more details later on, but one caveat of Cloud Run that I’ll mention right now is that it’s intended to run stateless applications. Shiny applications are inherently stateful, so there’s a bit of friction here. There are a few ways to address this limitation, which we’ll dive into later on, but it’s worth mentioning at the outset that, for some use cases, this might make Cloud Run a nonstarter."
+  },
+  {
+    "objectID": "gcp_background.html#cloud-sql",
+    "href": "gcp_background.html#cloud-sql",
+    "title": "3  Google Cloud Background",
+    "section": "3.2 Cloud SQL",
+    "text": "3.2 Cloud SQL\nCloud SQL is, like its name suggests, GCP’s SQL database service. Like Cloud Run and many other GCP products, it’s a fully managed service, which (again) means that GCP takes care of a lot of the infrastructure, maintenance, etc. for you, and this is cool because if you’re like me, you’re not a database admin.\nCloud SQL supports MySQL, Postgres, and SQL Server. We’ll be using Postgres here, but I doubt it really makes much of a difference if you want to use one of the other two.\nAs sort of a side note, we could also use BigQuery rather than Cloud SQL. Deciding between BigQuery and Cloud SQL will depend on your use case."
+  },
+  {
+    "objectID": "gcp_background.html#cloud-build",
+    "href": "gcp_background.html#cloud-build",
+    "title": "3  Google Cloud Background",
+    "section": "3.3 Cloud Build",
+    "text": "3.3 Cloud Build\nCloud Build is GCP’s service for building, testing, and deploying containers. Since we’re deploying a containerized application on Cloud Run, we need a way to build that container. Cloud Build provides a way to do this when provided with the application source code and a Dockerfile. We can even trigger builds to begin automatically when we push code to a Github repo.\nOne nice feature of Cloud Build is that it gives you a lot of (120) free build minutes per day. That said, there are plenty of ways to build containers without needing Cloud Build, and you don’t need to use Cloud Build if you don’t want."
+  },
+  {
+    "objectID": "gcp_background.html#artifact-registry",
+    "href": "gcp_background.html#artifact-registry",
+    "title": "3  Google Cloud Background",
+    "section": "3.4 Artifact Registry",
+    "text": "3.4 Artifact Registry\nOnce we build our containers, we need a place to store them. Enter Artifact Registry, GCP’s service for storing containers plus some other stuff I guess. We’ll configure our container builds to be stored here, and Cloud Run will know where to look for them when it’s time to deploy."
+  },
+  {
+    "objectID": "gcp_background.html#secret-manager",
+    "href": "gcp_background.html#secret-manager",
+    "title": "3  Google Cloud Background",
+    "section": "3.5 Secret Manager",
+    "text": "3.5 Secret Manager\nSecret Manager is a small but important piece of our application. It provides a way for us to pass sensitive data (passwords, in our case) into our application without having to commit this data to our application code."
+  },
+  {
+    "objectID": "gcp_background.html#wrapping-up",
+    "href": "gcp_background.html#wrapping-up",
+    "title": "3  Google Cloud Background",
+    "section": "3.6 Wrapping Up",
+    "text": "3.6 Wrapping Up\nIn this chapter, we discussed what GCP is in a very broad sense. We also previewed some of the GCP services we’ll be using to build and deploy our shiny application. In the next chapter, we’ll spend some time considering why we’d want to deploy our shiny application via Google Cloud."
   }
 ]

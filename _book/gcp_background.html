@@ -202,7 +202,18 @@ ul.task-list{list-style: none;}
 </nav>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#cloud-run" id="toc-cloud-run" class="nav-link active" data-scroll-target="#cloud-run"> <span class="header-section-number">3.1</span> Cloud Run</a></li>
+  <li><a href="#cloud-sql" id="toc-cloud-sql" class="nav-link" data-scroll-target="#cloud-sql"> <span class="header-section-number">3.2</span> Cloud SQL</a></li>
+  <li><a href="#cloud-build" id="toc-cloud-build" class="nav-link" data-scroll-target="#cloud-build"> <span class="header-section-number">3.3</span> Cloud Build</a></li>
+  <li><a href="#artifact-registry" id="toc-artifact-registry" class="nav-link" data-scroll-target="#artifact-registry"> <span class="header-section-number">3.4</span> Artifact Registry</a></li>
+  <li><a href="#secret-manager" id="toc-secret-manager" class="nav-link" data-scroll-target="#secret-manager"> <span class="header-section-number">3.5</span> Secret Manager</a></li>
+  <li><a href="#wrapping-up" id="toc-wrapping-up" class="nav-link" data-scroll-target="#wrapping-up"> <span class="header-section-number">3.6</span> Wrapping Up</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -230,11 +241,38 @@ ul.task-list{list-style: none;}
 <ul>
 <li><a href="https://cloud.google.com/docs/get-started">GCP’s “Get Started” page</a>, which has a great variety of tutorials and overview docs</li>
 <li><a href="https://www.youtube.com/user/googlecloudplatform">The Google Cloud Tech YouTube channel</a>, which is the official GCP channel. It has some great videos for each service/product GCP offers.</li>
-<li>Docs for the service you’re interested in. Each service has a variety of documents, which include code snippets and examples for many popular languages. Unfortunately, none of these code snippets are written in R (hence this book), but if you can (sort of) read another language, you can get a sense for various services.</li>
+<li>Docs for the service you’re interested in. Each service has a variety of documents, which include code snippets and examples for many popular languages. Unfortunately, none of these code snippets are written in R (hence this book), but if you can (more or less) read another language, you can mostly get a sense for various services and how to implement them.</li>
 </ul>
-<p>RESUME HERE. GET INTO SPECIFIC GCP SERVICES WE’LL FOCUS ON. THEN WHY GCP.</p>
+<p>That said, we’ll be using the following GCP services in this project. I’ll provide a very brief overview of them here, and then provide more detail about each one in the appropriate sections later on.</p>
+<section id="cloud-run" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="cloud-run"><span class="header-section-number">3.1</span> Cloud Run</h2>
+<p><a href="https://cloud.google.com/run">Cloud Run</a> is the main service we’re using to run our shiny application. It’s a “fully managed serverless platform,” which basically means that GCP takes care of a lot of the configuration, provisioning, and management for you – you don’t need to worry about maintaining a server – which is great. Another key feature of Cloud Run is that it runs containerized applications, and as a result can run pretty much anything you want it to, including shiny apps. We’ll get into more details later on, but one caveat of Cloud Run that I’ll mention right now is that it’s intended to run stateless applications. Shiny applications are inherently stateful, so there’s a bit of friction here. There are a few ways to address this limitation, which we’ll dive into later on, but it’s worth mentioning at the outset that, for some use cases, this might make Cloud Run a nonstarter.</p>
+</section>
+<section id="cloud-sql" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="cloud-sql"><span class="header-section-number">3.2</span> Cloud SQL</h2>
+<p><a href="https://cloud.google.com/sql/">Cloud SQL</a> is, like its name suggests, GCP’s SQL database service. Like Cloud Run and many other GCP products, it’s a fully managed service, which (again) means that GCP takes care of a lot of the infrastructure, maintenance, etc. for you, and this is cool because if you’re like me, you’re not a database admin.</p>
+<p>Cloud SQL supports MySQL, Postgres, and SQL Server. We’ll be using Postgres here, but I doubt it really makes much of a difference if you want to use one of the other two.</p>
+<p>As sort of a side note, we could also use <a href="https://cloud.google.com/bigquery">BigQuery</a> rather than Cloud SQL. Deciding between BigQuery and Cloud SQL will depend on your use case.</p>
+</section>
+<section id="cloud-build" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="cloud-build"><span class="header-section-number">3.3</span> Cloud Build</h2>
+<p><a href="https://cloud.google.com/build">Cloud Build</a> is GCP’s service for building, testing, and deploying containers. Since we’re deploying a containerized application on Cloud Run, we need a way to build that container. Cloud Build provides a way to do this when provided with the application source code and a Dockerfile. We can even trigger builds to begin automatically when we push code to a Github repo.</p>
+<p>One nice feature of Cloud Build is that it gives you a lot of (120) free build minutes per day. That said, there are plenty of ways to build containers without needing Cloud Build, and you don’t <em>need</em> to use Cloud Build if you don’t want.</p>
+</section>
+<section id="artifact-registry" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="artifact-registry"><span class="header-section-number">3.4</span> Artifact Registry</h2>
+<p>Once we build our containers, we need a place to store them. Enter <a href="https://cloud.google.com/artifact-registry">Artifact Registry</a>, GCP’s service for storing containers plus some other stuff I guess. We’ll configure our container builds to be stored here, and Cloud Run will know where to look for them when it’s time to deploy.</p>
+</section>
+<section id="secret-manager" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="secret-manager"><span class="header-section-number">3.5</span> Secret Manager</h2>
+<p><a href="https://cloud.google.com/secret-manager">Secret Manager</a> is a small but important piece of our application. It provides a way for us to pass sensitive data (passwords, in our case) into our application without having to commit this data to our application code.</p>
+</section>
+<section id="wrapping-up" class="level2" data-number="3.6">
+<h2 data-number="3.6" class="anchored" data-anchor-id="wrapping-up"><span class="header-section-number">3.6</span> Wrapping Up</h2>
+<p>In this chapter, we discussed what GCP is in a very broad sense. We also previewed some of the GCP services we’ll be using to build and deploy our shiny application. In the next chapter, we’ll spend some time considering why we’d want to deploy our shiny application via Google Cloud.</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script type="application/javascript">

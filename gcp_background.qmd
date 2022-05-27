@@ -6,6 +6,36 @@ It is well beyond the scope of this little booklet to delve into all of the feat
 
 - [GCP's "Get Started" page](https://cloud.google.com/docs/get-started), which has a great variety of tutorials and overview docs
 - [The Google Cloud Tech YouTube channel](https://www.youtube.com/user/googlecloudplatform), which is the official GCP channel. It has some great videos for each service/product GCP offers.
-- Docs for the service you're interested in. Each service has a variety of documents, which include code snippets and examples for many popular languages. Unfortunately, none of these code snippets are written in R (hence this book), but if you can (sort of) read another language, you can get a sense for various services.
+- Docs for the service you're interested in. Each service has a variety of documents, which include code snippets and examples for many popular languages. Unfortunately, none of these code snippets are written in R (hence this book), but if you can (more or less) read another language, you can mostly get a sense for various services and how to implement them.
 
-RESUME HERE. GET INTO SPECIFIC GCP SERVICES WE'LL FOCUS ON. THEN WHY GCP.
+That said, we'll be using the following GCP services in this project. I'll provide a very brief overview of them here, and then provide more detail about each one in the appropriate sections later on.
+
+## Cloud Run
+
+[Cloud Run](https://cloud.google.com/run) is the main service we're using to run our shiny application. It's a "fully managed serverless platform," which basically means that GCP takes care of a lot of the configuration, provisioning, and management for you -- you don't need to worry about maintaining a server -- which is great. Another key feature of Cloud Run is that it runs containerized applications, and as a result can run pretty much anything you want it to, including shiny apps. We'll get into more details later on, but one caveat of Cloud Run that I'll mention right now is that it's intended to run stateless applications. Shiny applications are inherently stateful, so there's a bit of friction here. There are a few ways to address this limitation, which we'll dive into later on, but it's worth mentioning at the outset that, for some use cases, this might make Cloud Run a nonstarter.
+
+## Cloud SQL
+
+[Cloud SQL](https://cloud.google.com/sql/) is, like its name suggests, GCP's SQL database service. Like Cloud Run and many other GCP products, it's a fully managed service, which (again) means that GCP takes care of a lot of the infrastructure, maintenance, etc. for you, and this is cool because if you're like me, you're not a database admin.
+
+Cloud SQL supports MySQL, Postgres, and SQL Server. We'll be using Postgres here, but I doubt it really makes much of a difference if you want to use one of the other two.
+
+As sort of a side note, we could also use [BigQuery](https://cloud.google.com/bigquery) rather than Cloud SQL. Deciding between BigQuery and Cloud SQL will depend on your use case.
+
+## Cloud Build
+
+[Cloud Build](https://cloud.google.com/build) is GCP's service for building, testing, and deploying containers. Since we're deploying a containerized application on Cloud Run, we need a way to build that container. Cloud Build provides a way to do this when provided with the application source code and a Dockerfile. We can even trigger builds to begin automatically when we push code to a Github repo.
+
+One nice feature of Cloud Build is that it gives you a lot of (120) free build minutes per day. That said, there are plenty of ways to build containers without needing Cloud Build, and you don't *need* to use Cloud Build if you don't want.
+
+## Artifact Registry
+
+Once we build our containers, we need a place to store them. Enter [Artifact Registry](https://cloud.google.com/artifact-registry), GCP's service for storing containers plus some other stuff I guess. We'll configure our container builds to be stored here, and Cloud Run will know where to look for them when it's time to deploy.
+
+## Secret Manager
+
+[Secret Manager](https://cloud.google.com/secret-manager) is a small but important piece of our application. It provides a way for us to pass sensitive data (passwords, in our case) into our application without having to commit this data to our application code.
+
+## Wrapping Up
+
+In this chapter, we discussed what GCP is in a very broad sense. We also previewed some of the GCP services we'll be using to build and deploy our shiny application. In the next chapter, we'll spend some time considering why we'd want to deploy our shiny application via Google Cloud.
