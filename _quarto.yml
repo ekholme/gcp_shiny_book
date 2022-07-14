@@ -24,6 +24,7 @@ book:
         - cloudbuild.qmd
     - part: cloud_sql.qmd
       chapters:
+        - sql_necessary.qmd
         - sql_setup.qmd
         - sql_create.qmd
     - part: cloud_run.qmd

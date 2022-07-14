@@ -1,0 +1,5 @@
+# Do You Need a Database?
+
+Before we go about setting up a database, you should really think about whether your application *needs* a database. Databases are great if you have a lot of data that's being updated/accessed frequently. And even though GCP offers managed databases that don't require all that much from you to maintain, they're not trivial to set up (although they're not that difficult). More importantly, though, is that they're considerably more expensive than something like [Google Cloud Storage](https://cloud.google.com/storage), so if you don't actually need the capabilities of a database -- that is, if you just need a place to dump a mostly static dataset -- then it's not worth it to pay for a database.
+
+**insert some stuff re: why you might need/might not need a db**
